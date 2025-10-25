@@ -2,6 +2,36 @@
 
 Configuration files for my CachyOS setup.
 
+## Prerequisites
+
+Before installing the dotfiles, make sure you have the required tools installed:
+
+### Install Zsh
+```bash
+sudo pacman -S zsh
+```
+
+Set Zsh as your default shell:
+```bash
+chsh -s $(which zsh)
+```
+
+### Install Wezterm
+```bash
+sudo pacman -S wezterm
+```
+
+### Install Starship
+```bash
+sudo pacman -S starship
+```
+
+Or install all at once:
+```bash
+sudo pacman -S zsh wezterm starship
+chsh -s $(which zsh)
+```
+
 ## Installation
 
 To install these dotfiles on a new machine, copy the files to the following locations:
