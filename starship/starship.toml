@@ -1,0 +1,272 @@
+# Format: Definiert die Struktur des Prompts (2 Zeilen)
+format = """
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$python\
+$jobs\
+$status\
+$fill\
+$username\
+$hostname\
+$line_break\
+${custom.arrow}"""
+
+right_format = """${custom.tsip}"""
+
+# Neuer Prompt hat immer Leerzeile davor
+# add_newline = true
+
+# Username - immer anzeigen (Dracula Comment Gray - gedeckt)
+[username]
+style_user = "#6272a4"
+style_root = "bold #ff5555"
+format = " [$user]($style)"
+disabled = false
+show_always = true
+
+# Hostname - immer anzeigen (Dracula Comment Gray - gedeckt)
+[hostname]
+ssh_only = false
+format = "[@$hostname](#6272a4) "
+disabled = false
+
+# Directory - truncated auf 3 Ebenen (Dracula Cyan)
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+format = "[$path]($style)[$read_only]($read_only_style) "
+style = "bold #8be9fd"
+read_only = " 🔒"
+read_only_style = "#ff5555"
+
+# Git Branch (Dracula Green when clean)
+[git_branch]
+symbol = " "
+format = "[$symbol$branch]($style) "
+style = "bold #50fa7b"
+
+# Git Status - zeigt alle Details mit Wörtern und Anzahl (Dracula Comment Gray - subtil)
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style) )'
+style = "#6272a4"
+conflicted = "${count} conflicted "
+ahead = "${count} ahead "
+behind = "${count} behind "
+diverged = "⇡${ahead_count}⇣${behind_count} "
+untracked = "${count} untracked"
+stashed = "${count} stashed "
+modified = "${count} modified "
+staged = "${count} staged "
+renamed = "${count} renamed "
+deleted = "${count} deleted"
+disabled = false
+
+# Git Commit (Dracula Purple)
+[git_commit]
+commit_hash_length = 7
+tag_symbol = " "
+disabled = false
+
+# Git State (Dracula Red)
+[git_state]
+format = '[\($state( $progress_current of $progress_total)\)]($style) '
+cherry_pick = "[🍒 PICKING](bold #ff5555)"
+
+# Python - zeigt Version + venv (Dracula Yellow)
+[python]
+symbol = "py "
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+style = "#f1fa8c bold"
+pyenv_version_name = false
+pyenv_prefix = "pyenv "
+python_binary = ["python3", "python"]
+detect_extensions = ["py"]
+detect_files = [".python-version", "Pipfile", "pyproject.toml", "requirements.txt", "setup.py", "tox.ini"]
+detect_folders = []
+disabled = false
+
+# Character - invisible, actual prompt symbol is custom.arrow
+[character]
+success_symbol = ""
+error_symbol = ""
+vimcmd_symbol = ""
+
+# Status - Exit Code nur bei Fehler (Dracula Red)
+[status]
+style = "bold #ff5555"
+symbol = "✘"
+format = '[$symbol $status]($style) '
+disabled = false
+
+# Background Jobs (Dracula Cyan)
+[jobs]
+symbol = "✦"
+number_threshold = 1
+symbol_threshold = 1
+format = "[$symbol$number]($style) "
+style = "bold #8be9fd"
+
+# Fill - füllt Platz zwischen links und rechts mit Linie
+[fill]
+symbol = "─"
+style = "bold #6272a4"
+
+# Deaktiviere andere Language-Module
+[nodejs]
+disabled = true
+
+[rust]
+disabled = true
+
+[golang]
+disabled = true
+
+[java]
+disabled = true
+
+[ruby]
+disabled = true
+
+[php]
+disabled = true
+
+[lua]
+disabled = true
+
+[dart]
+disabled = true
+
+[elixir]
+disabled = true
+
+[elm]
+disabled = true
+
+[haskell]
+disabled = true
+
+[julia]
+disabled = true
+
+[kotlin]
+disabled = true
+
+[nim]
+disabled = true
+
+[ocaml]
+disabled = true
+
+[perl]
+disabled = true
+
+[raku]
+disabled = true
+
+[rlang]
+disabled = true
+
+[scala]
+disabled = true
+
+[swift]
+disabled = true
+
+# Deaktiviere Cloud-Provider
+[aws]
+disabled = true
+
+[gcloud]
+disabled = true
+
+[azure]
+disabled = true
+
+# Deaktiviere Container/Infrastructure
+[kubernetes]
+disabled = true
+
+[terraform]
+disabled = true
+
+[docker_context]
+disabled = true
+
+[container]
+disabled = true
+
+[helm]
+disabled = true
+
+# Deaktiviere Package Manager
+[package]
+disabled = true
+
+[conda]
+disabled = true
+
+# Deaktiviere sonstige Module
+[cmake]
+disabled = true
+
+[cobol]
+disabled = true
+
+[crystal]
+disabled = true
+
+[dotnet]
+disabled = true
+
+[fennel]
+disabled = true
+
+[gradle]
+disabled = true
+
+[nix_shell]
+disabled = true
+
+[opa]
+disabled = true
+
+[pulumi]
+disabled = true
+
+[purescript]
+disabled = true
+
+[zig]
+disabled = true
+
+[buf]
+disabled = true
+
+[guix_shell]
+disabled = true
+
+[daml]
+disabled = true
+
+[deno]
+disabled = true
+
+[bun]
+disabled = true
+
+# Custom Arrow Symbol (replacing character at start of line)
+[custom.arrow]
+command = "echo -n '❯'"
+when = "true"
+style = "#50fa7b bold"
+format = "[$output]($style) "
+
+# Custom Tailscale IP Module
+[custom.tsip]
+command = """ tailscale ip --4 2>/dev/null | tr -d '\n' """
+when = """ tailscale status 2>&1 | grep -qv 'stopped' """
+style = "#ffb86c"
+format = "[$output]($style)"
