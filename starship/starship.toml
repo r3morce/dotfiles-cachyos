@@ -267,6 +267,5 @@ format = "[$output]($style) "
 # Custom Tailscale IP Module
 [custom.tsip]
 command = """ tailscale ip --4 2>/dev/null | tr -d '\n' """
-when = """ tailscale status 2>&1 | grep -qv 'stopped' """
 style = "#ffb86c"
 format = "[$output]($style)"
