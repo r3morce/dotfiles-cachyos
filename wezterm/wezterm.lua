@@ -8,7 +8,9 @@ config.window_decorations = "RESIZE"
 config.font = wezterm.font("Fira Code")
 config.font_size = 12.0
 
--- Key bindings for pane navigation
+config.window_background_opacity = 0.85
+config.text_background_opacity = 0.9
+
 config.keys = {
 	-- Switch between panes using Alt + arrow keys
 	{
