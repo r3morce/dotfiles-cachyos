@@ -1,0 +1,12 @@
+# Backups
+.dotfiles-backup/
+
+# Nvim - don't sync these
+nvim/.config/nvim/lazy-lock.json
+nvim/.config/nvim/lazyvim.json
+nvim/.config/nvim/.neoconf.json
+
+# System
+.DS_Store
+*~
+*.swp

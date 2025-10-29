@@ -1,74 +1,81 @@
-# CachyOS Dotfiles
+# Dotfiles Management
 
-Configuration files for my CachyOS setup.
+**Super simple, maximum safety.** Two bash scripts with automatic backups, no symlinks.
+
+---
 
 ## Prerequisites
 
-Before installing the dotfiles, make sure you have the required tools installed:
+### CachyOS/Arch Installation
 
-### Install Zsh
 ```bash
-sudo pacman -S zsh
-```
+# Core tools
+sudo pacman -S zsh wezterm neovim git rsync
 
-Set Zsh as your default shell:
-```bash
+# Powerlevel10k theme
+yay -S zsh-theme-powerlevel10k-git
+
+# Set Zsh as default shell
 chsh -s $(which zsh)
 ```
 
-### Install Wezterm
-```bash
-sudo pacman -S wezterm
-```
+---
 
-### Install Powerlevel10k
-```bash
-yay -S zsh-theme-powerlevel10k-git
-```
-
-Or install all at once:
-```bash
-sudo pacman -S zsh wezterm
-yay -S zsh-theme-powerlevel10k-git
-chsh -s $(which zsh)
-```
-
-## Installation
-
-To install these dotfiles on a new machine, copy the files to the following locations:
-
-### Zsh Configuration
-- **Source**: `zsh/.zshrc`
-- **Destination**: `~/.zshrc`
+## Setup
 
 ```bash
-cp zsh/.zshrc ~/.zshrc
+./setup.sh              # Create directory structure
+./collect.sh            # Copy current dotfiles to repo
 ```
 
-### Wezterm Configuration
-- **Source**: `wezterm/wezterm.lua`
-- **Destination**: `~/.config/wezterm/wezterm.lua`
+---
+
+## Usage
+
+### Dotfiles geändert? → Ins Repo kopieren
 
 ```bash
-mkdir -p ~/.config/wezterm
-cp wezterm/wezterm.lua ~/.config/wezterm/
+./collect.sh
 ```
 
-### Powerlevel10k Configuration
-- **Source**: `p10k/.p10k.zsh`
-- **Destination**: `~/.p10k.zsh`
+---
 
-```bash
-cp p10k/.p10k.zsh ~/
+## Safety - Automatic Backups
+
+**Every time** you run `deploy.sh`, timestamped backups are created:
+
+```
+~/.dotfiles-backup/
+├── 20251029_143052/    ← Backup vom 29.10.2025 um 14:30:52
+│   ├── .zshrc
+│   ├── .p10k.zsh
+│   └── .config/
+│       ├── nvim/
+│       └── wezterm/
+└── 20251028_091234/    ← Vorheriges Backup
 ```
 
-## Quick Install
+`collect.sh` checks for uncommitted changes before overwriting.
 
-Run all commands at once:
+---
 
-```bash
-cp zsh/.zshrc ~/.zshrc
-mkdir -p ~/.config/wezterm
-cp wezterm/wezterm.lua ~/.config/wezterm/
-cp p10k/.p10k.zsh ~/
-```
+## What Gets Synced
+
+| Source (Home)               | Destination (Repo)       |
+|-----------------------------|--------------------------|
+| `~/.zshrc`                  | `zsh/.zshrc`             |
+| `~/.p10k.zsh`               | `p10k/.p10k.zsh`         |
+| `~/.config/wezterm/`        | `wezterm/`               |
+| `~/.config/nvim/`           | `nvim/.config/nvim/`     |
+
+**Note:** Nvim lock files (lazy-lock.json, lazyvim.json, .neoconf.json) are excluded.
+
+---
+
+## Troubleshooting
+
+**Q: "collect.sh says I have uncommitted changes"**
+A: Commit or stash your changes first, or confirm to proceed.
+
+**Q: "Where are my backups?"**
+A: `~/.dotfiles-backup/` - sorted by date.
