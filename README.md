@@ -21,15 +21,6 @@ chsh -s $(which zsh)
 
 ---
 
-## Setup
-
-```bash
-./setup.sh              # Create directory structure
-./collect.sh            # Copy current dotfiles to repo
-```
-
----
-
 ## Usage
 
 ### Dotfiles geändert? → Ins Repo kopieren
