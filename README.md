@@ -1,6 +1,6 @@
-# Dotfiles Management
+# Dotfiles Management with GNU Stow
 
-**Super simple, maximum safety.** Two bash scripts with automatic backups, no symlinks.
+**Simple, clean, and portable dotfiles using GNU Stow and symlinks.**
 
 ---
 
@@ -10,7 +10,7 @@
 
 ```bash
 # Core tools
-sudo pacman -S zsh wezterm neovim git rsync
+sudo pacman -S zsh wezterm neovim git stow
 
 # Powerlevel10k theme
 yay -S zsh-theme-powerlevel10k-git
@@ -21,52 +21,40 @@ chsh -s $(which zsh)
 
 ---
 
-## Usage
-
-### Dotfiles geändert? → Ins Repo kopieren
+## Setup
 
 ```bash
-./collect.sh
+# Clone and navigate to dotfiles
+git clone https://github.com/r3morce/dotfiles-cachyos.git dotfiles-cachyos
+cd dotfiles-cachyos
 ```
 
 ---
 
-## Safety - Automatic Backups
+## Installation
 
-**Every time** you run `deploy.sh`, timestamped backups are created:
-
-```
-~/.dotfiles-backup/
-├── 20251029_143052/    ← Backup vom 29.10.2025 um 14:30:52
-│   ├── .zshrc
-│   ├── .p10k.zsh
-│   └── .config/
-│       ├── nvim/
-│       └── wezterm/
-└── 20251028_091234/    ← Vorheriges Backup
+```bash
+# Prepare environment and install
+./prepare.sh
+stow --target=$HOME zsh p10k nvim wezterm
 ```
 
-`collect.sh` checks for uncommitted changes before overwriting.
+The prepare script automatically handles conflicts by:
+- Removing existing symlinks
+- Backing up files/directories with `.bak` suffix
+- Cleaning up broken symlinks in backup directories
 
 ---
 
-## What Gets Synced
+## Overview
 
-| Source (Home)               | Destination (Repo)       |
-|-----------------------------|--------------------------|
-| `~/.zshrc`                  | `zsh/.zshrc`             |
-| `~/.p10k.zsh`               | `p10k/.p10k.zsh`         |
-| `~/.config/wezterm/`        | `wezterm/`               |
-| `~/.config/nvim/`           | `nvim/.config/nvim/`     |
+GNU Stow creates symbolic links from your home directory to files in this repository:
 
-**Note:** Nvim lock files (lazy-lock.json, lazyvim.json, .neoconf.json) are excluded.
+| Package | Source (Repo) | Target (Home) |
+|---------|---------------|---------------|
+| `zsh` | `zsh/.zshrc` | `~/.zshrc` |
+| `p10k` | `p10k/.p10k.zsh` | `~/.p10k.zsh` |
+| `nvim` | `nvim/.config/nvim/` | `~/.config/nvim/` |
+| `wezterm` | `wezterm/wezterm.lua` | `~/.config/wezterm/wezterm.lua` |
 
----
-
-## Troubleshooting
-
-**Q: "collect.sh says I have uncommitted changes"**
-A: Commit or stash your changes first, or confirm to proceed.
-
-**Q: "Where are my backups?"**
-A: `~/.dotfiles-backup/` - sorted by date.
+**Note**: Nvim lock files (lazy-lock.json, lazyvim.json, .neoconf.json) are excluded from the repo.

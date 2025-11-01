@@ -14,35 +14,24 @@ config.window_background_opacity = 0.97
 config.keys = {
 	-- Switch between panes using Alt + arrow keys
 	{
-		key = "LeftArrow",
+		key = "h",
 		mods = "ALT",
 		action = wezterm.action({ ActivatePaneDirection = "Left" }),
 	},
 	{
-		key = "RightArrow",
+		key = "l",
 		mods = "ALT",
 		action = wezterm.action({ ActivatePaneDirection = "Right" }),
 	},
 	{
-		key = "UpArrow",
+		key = "k",
 		mods = "ALT",
 		action = wezterm.action({ ActivatePaneDirection = "Up" }),
 	},
 	{
-		key = "DownArrow",
+		key = "j",
 		mods = "ALT",
 		action = wezterm.action({ ActivatePaneDirection = "Down" }),
-	},
-	-- Cycle through panes with Alt + Tab
-	{
-		key = "Tab",
-		mods = "ALT",
-		action = wezterm.action({ ActivatePaneDirection = "Next" }),
-	},
-	{
-		key = "Tab",
-		mods = "ALT|SHIFT",
-		action = wezterm.action({ ActivatePaneDirection = "Prev" }),
 	},
 }
 

@@ -11,6 +11,7 @@ autoload -U compinit && compinit
 
 # Path configuration
 export PATH="$HOME/.local/bin:$PATH"
+export PATH=~/.opencode/bin:$PATH
 
 # Better editor integration
 export VISUAL=nvim
