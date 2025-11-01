@@ -1,0 +1,52 @@
+# Files and directories to ignore when stowing
+# This prevents stow from trying to symlink these files/directories
+
+# Git files
+.git
+.gitignore
+.gitattributes
+
+# Build and dependency files
+Makefile
+README.md
+LICENSE
+
+# Backup directories
+.dotfiles-backup
+*.backup
+*.bak
+
+# Editor and IDE files
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Logs
+*.log
+logs/
+
+# Node modules (if any)
+node_modules/
+
+# Python cache (if any)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Documentation files
+docs/
+*.md
+!README.md
