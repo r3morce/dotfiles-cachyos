@@ -34,15 +34,8 @@ cd dotfiles-cachyos
 ## Installation
 
 ```bash
-# Prepare environment and install
-./prepare.sh
 stow --target=$HOME zsh p10k nvim wezterm
 ```
-
-The prepare script automatically handles conflicts by:
-- Removing existing symlinks
-- Backing up files/directories with `.bak` suffix
-- Cleaning up broken symlinks in backup directories
 
 ---
 
@@ -56,5 +49,3 @@ GNU Stow creates symbolic links from your home directory to files in this reposi
 | `p10k` | `p10k/.p10k.zsh` | `~/.p10k.zsh` |
 | `nvim` | `nvim/.config/nvim/` | `~/.config/nvim/` |
 | `wezterm` | `wezterm/wezterm.lua` | `~/.config/wezterm/wezterm.lua` |
-
-**Note**: Nvim lock files (lazy-lock.json, lazyvim.json, .neoconf.json) are excluded from the repo.
